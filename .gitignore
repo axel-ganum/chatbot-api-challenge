@@ -1,0 +1,8 @@
+# Node modules
+/node_modules/
+
+# Archivos de entorno
+.env
+
+# Archivos de test
+coverage/

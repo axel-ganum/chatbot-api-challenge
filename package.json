@@ -1,0 +1,27 @@
+{
+  "name": "api-chatbot-sushui",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "NODE_OPTIONS='--experimental-vm-modules' jest",
+    "dev": "nodemon src/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.9.2"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.26.0",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.9",
+    "supertest": "^7.0.0"
+  }
+}
