@@ -44,14 +44,21 @@ export const obtenerStatus =  (req, res) => {
 
     console.log('Pregunta recibida (depuración extendida):', pregunta); 
     
+   
     const preguntasRelacionadas = [
-       'abiertos',
-       'cerrado',
-       'horario',
-       'cuando abren',
-       'cuando cierran',
-       'disponibilidad'
-    ]
+        'abiertos',
+        'cerrado',
+        'horario',
+        'cuando abren',
+        'cuando cierran',
+        'disponibilidad',
+        'hasta qué hora están',
+        'qué hora cierran',
+        'a qué hora cierran',
+        'horarios de apertura',
+        'horarios de cierre',
+        'están abiertos ahora'
+    ];
      
     let contienePalabraClave = false;
 
@@ -65,17 +72,34 @@ export const obtenerStatus =  (req, res) => {
     console.log('Contiene palabra clave:', contienePalabraClave);  
 
     if (contienePalabraClave) {
-        
         const ahora = new Date();
         const horaActual = ahora.getHours(); 
 
         const horarioApertura = parseInt(process.env.HORARIO_APERTURA, 10) || 12; 
-        const horarioCierre = parseInt(process.env.HORARIO_CIERRE, 10) || 23;    // Predeterminado: 11 P
+        const horarioCierre = parseInt(process.env.HORARIO_CIERRE, 10) || 23;    // Predeterminado: 11 PM
 
-        if (horaActual >= horarioApertura && horaActual <= horarioCierre) {
-            res.status(200).json({ status: 'abierto', mensaje: '¡Estamos abiertos, haz tu pedido!' });
-        } else {
-            res.status(200).json({ status: 'cerrado', mensaje: `Estamos cerrados. Nuestro horario es de ${horarioApertura} PM a ${horarioCierre} PM.` });
+        
+        if (pregunta.includes('abierto') || pregunta.includes('abiertos ahora') || pregunta.includes('están abiertos ahora')) {
+            if (horaActual >= horarioApertura && horaActual <= horarioCierre) {
+                res.status(200).json({ status: 'abierto', mensaje: '¡Estamos abiertos, haz tu pedido!' });
+            } else {
+                res.status(200).json({ status: 'cerrado', mensaje: `Estamos cerrados. Nuestro horario es de ${horarioApertura} AM a ${horarioCierre} PM.` });
+            }
+        }
+        
+        else if (pregunta.includes('cierran') || pregunta.includes('hora cierran') || pregunta.includes('hasta qué hora están')) {
+            res.status(200).json({ status: 'horario', mensaje: `Nuestro horario de cierre es a las ${horarioCierre} PM.` });
+        }
+       
+        else if (pregunta.includes('abren') || pregunta.includes('hora abren')) {
+            res.status(200).json({ status: 'horario', mensaje: `Nuestro horario de apertura es a las ${horarioApertura} AM.` });
+        }
+        else {
+            if (horaActual >= horarioApertura && horaActual <= horarioCierre) {
+                res.status(200).json({ status: 'abierto', mensaje: '¡Estamos abiertos, haz tu pedido!' });
+            } else {
+                res.status(200).json({ status: 'cerrado', mensaje: `Estamos cerrados. Nuestro horario es de ${horarioApertura} AM a ${horarioCierre} PM.` });
+            }
         }
     } else {
         res.status(400).json({ status: 'error', mensaje: 'No entiendo la pregunta. ¿Quieres saber si estamos abiertos?' });
