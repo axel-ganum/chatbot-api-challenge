@@ -7,5 +7,8 @@ export default {
     globals: {
       'jest/globals': true,
     },
+    testTimeout: 10000,
+    detectOpenHandles: true,
+    testMatch: ['**/tests/**/*.test.js'],
   };
   

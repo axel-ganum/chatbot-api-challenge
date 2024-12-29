@@ -3,20 +3,25 @@ import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import menuRoutes from './routes/bot.js';
 import pedidoRoutes from './routes/bot.js'
+import satusRoutes from './routes/bot.js'
 
 dotenv.config();
 
+
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+
 
 app.use(express.json());
 
 app.use(menuRoutes);
 app.use(pedidoRoutes);
+app.use(satusRoutes);
 
 export default app;
 
+const PORT = process.env.TEST_PORT|| 3000;
+ 
 const startServer = async () => {
     try {
         await connectDB();
@@ -24,14 +29,16 @@ const startServer = async () => {
         
     } catch (error) {
          console.error('Error al conectar a la base de datos:', error);
-         process.exit(1)
+         return;
          
     }
+    app.listen(PORT, () => {
+       console.log(`Server escuchando en el puerto ${PORT}`);
+       
+    })
 }
 
 startServer();
 
-app.listen(PORT, () => {
-    console.log(`Server escuchando en el puerto ${PORT}`);
-    
-})
+
+

@@ -1,5 +1,9 @@
 import Menu from '../models/menu.js';
 import Pedido from '../models/pedido.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 export const obtenerMenu = async (req, res) => {
     try {
         const menu = await Menu.find();
@@ -29,5 +33,51 @@ export const crearPedido = async (req, res) => {
     } catch (error) {
        console.error('Error al crear el pedido:', error);
        res.status(500).json({error: 'Error interno del servidor'})
+    }
+}
+
+
+export const obtenerStatus =  (req, res) => {
+    let pregunta = req.body.pregunta?.toLowerCase().trim(); 
+
+    pregunta = pregunta.replace(/[¿?¡!]/g, '').trim();
+
+    console.log('Pregunta recibida (depuración extendida):', pregunta); 
+    
+    const preguntasRelacionadas = [
+       'abiertos',
+       'cerrado',
+       'horario',
+       'cuando abren',
+       'cuando cierran',
+       'disponibilidad'
+    ]
+     
+    let contienePalabraClave = false;
+
+    preguntasRelacionadas.forEach((palabra) => {
+      const regex = new RegExp(palabra, 'i'); 
+      if (regex.test(pregunta)) {
+        contienePalabraClave = true;
+      }
+    });
+
+    console.log('Contiene palabra clave:', contienePalabraClave);  
+
+    if (contienePalabraClave) {
+        
+        const ahora = new Date();
+        const horaActual = ahora.getHours(); 
+
+        const horarioApertura = parseInt(process.env.HORARIO_APERTURA, 10) || 12; 
+        const horarioCierre = parseInt(process.env.HORARIO_CIERRE, 10) || 23;    // Predeterminado: 11 P
+
+        if (horaActual >= horarioApertura && horaActual <= horarioCierre) {
+            res.status(200).json({ status: 'abierto', mensaje: '¡Estamos abiertos, haz tu pedido!' });
+        } else {
+            res.status(200).json({ status: 'cerrado', mensaje: `Estamos cerrados. Nuestro horario es de ${horarioApertura} PM a ${horarioCierre} PM.` });
+        }
+    } else {
+        res.status(400).json({ status: 'error', mensaje: 'No entiendo la pregunta. ¿Quieres saber si estamos abiertos?' });
     }
 }
