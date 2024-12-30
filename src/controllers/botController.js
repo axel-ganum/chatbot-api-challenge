@@ -28,6 +28,8 @@ export const crearPedido = async (req, res) => {
   const nuevoPedido = new Pedido({cliente, productos, total});
 
   await nuevoPedido.save();
+
+  console.log('Nuevo pedido creado:', nuevoPedido)
   res.status(201).json({mensaje: 'Pedido creado con éxito', Pedido: nuevoPedido});
 
     } catch (error) {
@@ -35,6 +37,8 @@ export const crearPedido = async (req, res) => {
        res.status(500).json({error: 'Error interno del servidor'})
     }
 }
+
+
 
 
 export const obtenerStatus =  (req, res) => {

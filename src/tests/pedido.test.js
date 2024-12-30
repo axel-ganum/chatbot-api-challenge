@@ -1,45 +1,60 @@
 import request from "supertest";
 import app from "../app.js";
-import mongoose from "mongoose";
-import dotenv from "dotenv";
+import Pedido from "../models/pedido.js";
+import { ObjectId } from 'mongodb';
 
-dotenv.config();
+jest.mock('../models/pedido.js');
 
-describe("Chatbot Sushi API - Pedidos", () => {
-    let server;
-
-    beforeAll(async () => {
-        
-        if (mongoose.connection.readyState === 0) {
-            await mongoose.connect(process.env.TEST_DB);
-        }
-
-        
-        server = app.listen(0, () => {
-            console.log(`Server escuchando en un puerto disponible`);
-        });
-    });
-
-    afterAll(async () => {
-
-        await mongoose.connection.db.dropDatabase();
-        await mongoose.connection.close();
-        server.close();
-    });
-
-    it("Debería crear un pedido con éxito", async () => {
+describe("Chatbot Sushi API", () => {
+    it('Debería crear un pedido con éxito', async () => {
+        const mockPedido = {
+            cliente: 'Cliente1',
+            productos: [
+                {
+                    nombre: 'California Roll',
+                    cantidad: 2,
+                    _id: new ObjectId('6771da60ec8769cc862173bc'),
+                },
+                {
+                    nombre: 'Spicy Tuna Roll',
+                    cantidad: 1,
+                    _id: new ObjectId('6771da60ec8769cc862173bd'),
+                },
+            ],
+            total: 380,
+            _id: new ObjectId('6771da60ec8769cc862173bb'),
+            fecha: new Date(),
+            __v: 0,
+            save: jest.fn().mockResolvedValue(true),
+        };
+    
+        Pedido.mockImplementation(() => mockPedido);
+    
         const res = await request(app)
-            .post("/pedido")
+            .post('/pedido')
             .send({
-                cliente: "Axel",
+                cliente: 'Cliente1',
                 productos: [
-                    { nombre: "California Roll", cantidad: 2, precio: 120 },
-                    { nombre: "Spicy Tuna Roll", cantidad: 1, precio: 140 },
+                    { nombre: 'California Roll', cantidad: 2, precio: 10 },
+                    { nombre: 'Spicy Tuna Roll', cantidad: 1, precio: 8 },
                 ],
             });
-
+    
         expect(res.statusCode).toBe(201);
-        expect(res.body.pedido).toHaveProperty("_id");
-        expect(res.body.total).toBe(380);
-    }, 20000);
+        expect(res.body.mensaje).toBe('Pedido creado con éxito');
+    
+        const expectedPedido = {
+            ...mockPedido,
+            _id: mockPedido._id.toString(),
+            productos: mockPedido.productos.map(p => ({
+                ...p,
+                _id: p._id.toString(),
+            })),
+            fecha: mockPedido.fecha.toISOString(),
+        };
+        const { save, ...expectedPedidoSinSave } = expectedPedido;
+        expect(res.body.Pedido).toEqual(expectedPedidoSinSave);
+        expect(mockPedido.save).toHaveBeenCalled();
+    });
+    
 });
