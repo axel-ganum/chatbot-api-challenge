@@ -44,6 +44,7 @@ export const crearPedido = async (req, res) => {
 export const obtenerStatus =  (req, res) => {
     let pregunta = req.body.pregunta?.toLowerCase().trim(); 
 
+
     pregunta = pregunta.replace(/[¿?¡!]/g, '').trim();
 
     console.log('Pregunta recibida (depuración extendida):', pregunta); 
@@ -79,10 +80,12 @@ export const obtenerStatus =  (req, res) => {
         const ahora = new Date();
         const horaActual = ahora.getHours(); 
 
-        const horarioApertura = parseInt(process.env.HORARIO_APERTURA, 10) || 12; 
-        const horarioCierre = parseInt(process.env.HORARIO_CIERRE, 10) || 23;    // Predeterminado: 11 PM
+       const horarioApertura = process.env.HORARIO_APERTURA ? parseInt(process.env.HORARIO_APERTURA, 10) : 12;
+       const horarioCierre = process.env.HORARIO_CIERRE ? parseInt(process.env.HORARIO_CIERRE, 10) : 23;
 
-        
+
+        console.log("Variables de horario:", horarioApertura, horarioCierre);
+
         if (pregunta.includes('abierto') || pregunta.includes('abiertos ahora') || pregunta.includes('están abiertos ahora')) {
             if (horaActual >= horarioApertura && horaActual <= horarioCierre) {
                 res.status(200).json({ status: 'abierto', mensaje: '¡Estamos abiertos, haz tu pedido!' });
