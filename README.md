@@ -340,7 +340,7 @@ A continuación, se describen los errores que pueden ocurrir en cada endpoint y 
   ```plaintext
   HORARIO_APERTURA=12
   HORARIO_CIERRE=23
-  
+  ```
 
 
 
