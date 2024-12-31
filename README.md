@@ -29,21 +29,18 @@ Este es un backend desarrollado para gestionar un chatbot que permite a los usua
 1. Clona este repositorio:
 
    ```bash
-
    git clone https://github.com/axel-ganum/chatbot-api-challenge.git
-   
+   ```
 
 
 2. **Instalar Dependencias**
 
    ```bash
-
     npm install
-
+   ```
 3. **Configurar las variables de entorno**
 
    ```bash
-
    MONGO_URI=<TU_URI_DE_MONGODB>
 
     ```
