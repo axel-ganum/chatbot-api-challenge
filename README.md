@@ -98,7 +98,7 @@ El proyecto incluye un script que carga datos iniciales del menú en MongoDB. Es
 ### **Datos de Ejemplo**
 
 El menú contiene los siguientes productos:
-  
+  ```javascript
 const menu = [
     {
         nombre: "California Roll",
@@ -160,7 +160,7 @@ const menu = [
 
 ### **Paso para cargar los datos:** 
 Ejecuta el siguiente comando en tu terminal para cargar los datos iniciales en la base de datos:
- 
+ ```bash
      node src/seedMenu.js
 
 
@@ -182,6 +182,7 @@ Ejecuta el siguiente comando en tu terminal para cargar los datos iniciales en l
 
 
      - **Ejemplo de Respuesta Exitosa:
+     ```json
     [
     {
       "_id": "63f18f9a7b8e9c42a4d4c6c9",
@@ -205,6 +206,7 @@ Ejecuta el siguiente comando en tu terminal para cargar los datos iniciales en l
 ---
 
 #### **Cuerpo de la Solicitud (JSON):**
+``json
 
    {
   "cliente": "Axel",
@@ -222,7 +224,7 @@ Ejecuta el siguiente comando en tu terminal para cargar los datos iniciales en l
 ---
 
 #### **Cuerpo de la Solicitud (JSON):**
-
+``json
 {
   "pregunta": "¿Están abiertos ahora?"
 }
