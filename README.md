@@ -83,12 +83,14 @@ El bot puede responder a las siguientes preguntas relacionadas con horarios y di
 - `"Hasta qué hora están"`
 - `"Qué hora cierran"`
 
+Si el mensaje no coincide con estos ejemplos, el bot responderá con un mensaje de error como este:
 
-Si el mensaje no coincide con estos ejemplos, el bot responderá con un mensaje de error como este: ```json
-    {
-       "status": "error",
-       "mensaje": "No entiendo la pregunta. ¿Queres saber si estamos abiertos?"
-    } 
+```json
+{
+   "status": "error",
+   "mensaje": "No entiendo la pregunta. ¿Queres saber si estamos abiertos?"
+}
+```
 
 
 ## **Datos de Ejemplo para MongoDB**
@@ -98,7 +100,8 @@ El proyecto incluye un script que carga datos iniciales del menú en MongoDB. Es
 ### **Datos de Ejemplo**
 
 El menú contiene los siguientes productos:
-  ```javascript
+```javascript
+        
 const menu = [
     {
         nombre: "California Roll",
@@ -157,16 +160,18 @@ const menu = [
     },
 ]; 
 
+     ```
+
 
 ### **Paso para cargar los datos:** 
 Ejecuta el siguiente comando en tu terminal para cargar los datos iniciales en la base de datos:
- ```bash
+``bash
      node src/seedMenu.js
 
 
     
 
-
+      ```
 
     ## **Endpoints Disponibles**
 
@@ -180,9 +185,8 @@ Ejecuta el siguiente comando en tu terminal para cargar los datos iniciales en l
      - **Descripción:** Devuelve el menú completo de productos disponibles.
 
 
-
      - **Ejemplo de Respuesta Exitosa:
-     ```json
+     ``json
     [
     {
       "_id": "63f18f9a7b8e9c42a4d4c6c9",
