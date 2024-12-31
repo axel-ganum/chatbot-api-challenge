@@ -160,12 +160,12 @@ const menu = [
     },
 ]; 
 
-     ```
+   ```
 
 
 ### **Paso para cargar los datos:** 
-Ejecuta el siguiente comando en tu terminal para cargar los datos iniciales en la base de datos:
-``bash
+Ejecuta el siguiente comando en tu terminal para cargar los datos iniciales en la base de datos: 
+```bash
      node src/seedMenu.js
 
 
