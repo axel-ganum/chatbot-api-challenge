@@ -39,7 +39,8 @@ Este es un backend desarrollado para gestionar un chatbot que permite a los usua
 3. **Configurar las variables de entorno**
    ```bash
    MONGO_URI=<TU_URI_DE_MONGODB>
-   
+
+    ```
 
 Podes configurar los horarios de apertura y cierre de la aplicación utilizando las siguientes variables de entorno en el archivo `.env`.
 
@@ -53,15 +54,15 @@ Podes configurar los horarios de apertura y cierre de la aplicación utilizando 
 
 ### **Para inicaiar el servidor**
     
-    ```bash
-      npm run dev
-
+```bash
+  npm run dev
+```
 
 ### **Para ejecutar los test**
     
-    ```bash
-    npm test
-
+ ```bash
+     npm test
+ ```
 ---
 
 ## **Tipos de Mensajes que el Bot Entiende**
