@@ -156,16 +156,17 @@ const menu = [
         descripcion: "Frijoles de soya al vapor con sal marina",
         precio: 60,
     },
-];
+]; 
 
-# Inicialización de la Base de Datos
-
-Para cargar los datos iniciales en la base de datos, ejecutar un script de seed. Este script inserta los datos necesarios, par el menú
 
 ### **Paso para cargar los datos:** 
 Ejecuta el siguiente comando en tu terminal para cargar los datos iniciales en la base de datos:
-``` bash
-```node src/seedMenu.js
+
+bash
+node src/seedMenu.js
+
+
+    
 
 
 
@@ -210,7 +211,7 @@ El chatbot expone los siguientes endpoints para interactuar con el sistema:
 #### **Cuerpo de la Solicitud (JSON):**
 ```json
 
-```{
+   {
   "cliente": "Axel",
   "productos": [
     { "nombre": "California Roll", "cantidad": 2, "precio": 120 },
