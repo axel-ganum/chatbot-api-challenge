@@ -98,7 +98,7 @@ El proyecto incluye un script que carga datos iniciales del menú en MongoDB. Es
 ### **Datos de Ejemplo**
 
 El menú contiene los siguientes productos:
-  ```javascript
+  
 const menu = [
     {
         nombre: "California Roll",
