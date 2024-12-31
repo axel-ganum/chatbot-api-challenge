@@ -53,8 +53,8 @@ Podes configurar los horarios de apertura y cierre de la aplicación utilizando 
 
 ### **Para inicaiar el servidor**
      
-   ```bash
-   npm run dev
+     ```bash
+     npm run dev
 
 
 ### **Para ejecutar los test**
