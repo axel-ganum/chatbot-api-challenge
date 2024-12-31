@@ -158,33 +158,29 @@ const menu = [
         descripcion: "Frijoles de soya al vapor con sal marina",
         precio: 60,
     },
-]; 
+];
+ 
 ```
-
 ### **Paso para cargar los datos:** 
 Ejecuta el siguiente comando en tu terminal para cargar los datos iniciales en la base de datos: 
-    
-       bash
+
+``` bash
      node src/seedMenu.js
+```
+## **Endpoints Disponibles**
+
+El chatbot expone los siguientes endpoints para interactuar con el sistema:
+
+ ---
+
+   ### **1. `/menu`**
+
+ - **Método:** `GET`
+ - **Descripción:** Devuelve el menú completo de productos disponibles.
 
 
-    
-
-
-    ## **Endpoints Disponibles**
-
-    El chatbot expone los siguientes endpoints para interactuar con el sistema:
-
-    ---
-
-     ### **1. `/menu`**
-
-    - **Método:** `GET`
-     - **Descripción:** Devuelve el menú completo de productos disponibles.
-
-
-     - **Ejemplo de Respuesta Exitosa:
-     ``json
+ - **Ejemplo de Respuesta Exitosa:**
+    ```json
     [
     {
       "_id": "63f18f9a7b8e9c42a4d4c6c9",
@@ -199,6 +195,7 @@ Ejecuta el siguiente comando en tu terminal para cargar los datos iniciales en l
       "precio": 140
     }
   ]
+  ```
 
   ### **2. `/pedido`**
 
@@ -208,7 +205,8 @@ Ejecuta el siguiente comando en tu terminal para cargar los datos iniciales en l
 ---
 
 #### **Cuerpo de la Solicitud (JSON):**
-``json
+
+```json
 
    {
   "cliente": "Axel",
@@ -217,7 +215,7 @@ Ejecuta el siguiente comando en tu terminal para cargar los datos iniciales en l
     { "nombre": "Spicy Tuna Roll", "cantidad": 1, "precio": 140 }
   ]
 }
-
+```
 ### **3. `/status`**
 
 - **Método:** `POST`
@@ -226,9 +224,14 @@ Ejecuta el siguiente comando en tu terminal para cargar los datos iniciales en l
 ---
 
 #### **Cuerpo de la Solicitud (JSON):**
-``json
+
+```json
 {
   "pregunta": "¿Están abiertos ahora?"
 }
+    
+
+
+
 
 
