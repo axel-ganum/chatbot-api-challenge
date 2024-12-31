@@ -337,6 +337,7 @@ A continuación, se describen los errores que pueden ocurrir en cada endpoint y 
 #### **Notas Adicionales**
 - El bot responde preguntas relacionadas con los horarios del restaurante, considerando el horario predeterminado de **12:00 PM a 11:00 PM**.
 - Si se desea ajustar estos horarios, se pueden configurar en las variables de entorno de la siguiente manera:
+
   ```plaintext
   HORARIO_APERTURA=12
   HORARIO_CIERRE=23
