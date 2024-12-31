@@ -52,9 +52,9 @@ Podes configurar los horarios de apertura y cierre de la aplicación utilizando 
 
 
 ### **Para inicaiar el servidor**
-     
-     ```bash
-     npm run dev
+    
+    ```bash
+      npm run dev
 
 
 ### **Para ejecutar los test**
@@ -85,11 +85,11 @@ El bot puede responder a las siguientes preguntas relacionadas con horarios y di
 
 
 Si el mensaje no coincide con estos ejemplos, el bot responderá con un mensaje de error como este:
-```json
-{
-    "status": "error",
-    "mensaje": "No entiendo la pregunta. ¿Queres saber si estamos abiertos?"
-}
+    ```json
+    {
+       "status": "error",
+       "mensaje": "No entiendo la pregunta. ¿Queres saber si estamos abiertos?"
+    } 
 
 
 ## **Datos de Ejemplo para MongoDB**
@@ -99,8 +99,7 @@ El proyecto incluye un script que carga datos iniciales del menú en MongoDB. Es
 ### **Datos de Ejemplo**
 
 El menú contiene los siguientes productos:
-
-```javascript
+      ```javascript
 const menu = [
     {
         nombre: "California Roll",
@@ -164,10 +163,8 @@ const menu = [
 Para cargar los datos iniciales en la base de datos, ejecutar un script de seed. Este script inserta los datos necesarios, par el menú
 
 ### **Paso para cargar los datos:**
-
- Ejecuta el siguiente comando en tu terminal:
-
-  ```bash
+Ejecuta el siguiente comando en tu terminal:
+     ```bash
   node src/seedMenu.js
 
 
