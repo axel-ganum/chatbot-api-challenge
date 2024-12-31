@@ -51,7 +51,7 @@ describe("Chatbot Sushi API - Estado del restaurante", () => {
         expect(res.statusCode).toBe(400);
         expect(res.body).toEqual({
             status: "error",
-            mensaje: "No entiendo la pregunta. ¿Quieres saber si estamos abiertos?",
+            mensaje: "No entiendo la pregunta. ¿Queres saber si estamos abiertos?",
         });
     });
 });

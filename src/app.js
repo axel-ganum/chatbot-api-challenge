@@ -1,6 +1,5 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import connectDB  from './config/db.js';
 import menuRoutes from './routes/bot.js';
 import pedidoRoutes from './routes/bot.js'
 import satusRoutes from './routes/bot.js'
@@ -21,7 +20,6 @@ app.use(satusRoutes);
 export default app;
 
 
-const PORT = 3000;
  
 
 

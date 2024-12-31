@@ -52,12 +52,14 @@ export const obtenerStatus =  (req, res) => {
    
     const preguntasRelacionadas = [
         'abiertos',
+        'abierto',
         'cerrado',
         'horario',
-        'cuando abren',
-        'cuando cierran',
+        'cuándo abren',
+        'cuándo cierran',
         'disponibilidad',
         'hasta qué hora están',
+        'a qué hora abren',
         'qué hora cierran',
         'a qué hora cierran',
         'horarios de apertura',
@@ -109,6 +111,6 @@ export const obtenerStatus =  (req, res) => {
             }
         }
     } else {
-        res.status(400).json({ status: 'error', mensaje: 'No entiendo la pregunta. ¿Quieres saber si estamos abiertos?' });
+        res.status(400).json({ status: 'error', mensaje: 'No entiendo la pregunta. ¿Queres saber si estamos abiertos?' });
     }
 }
