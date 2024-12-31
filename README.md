@@ -195,7 +195,8 @@ El chatbot expone los siguientes endpoints para interactuar con el sistema:
       "precio": 140
     }
   ]
-   ```
+   
+    ```
 
   ### **2. `/pedido`**
 
@@ -223,8 +224,7 @@ El chatbot expone los siguientes endpoints para interactuar con el sistema:
 
 ---
 
-#### **Cuerpo de la Solicitud (JSON):**
-
+#### **Cuerpo de la Solicitud (JSON):
 ```json
 {
   "pregunta": "¿Están abiertos ahora?"
