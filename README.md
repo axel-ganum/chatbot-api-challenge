@@ -194,9 +194,8 @@ El chatbot expone los siguientes endpoints para interactuar con el sistema:
       "descripcion": "Rollo de sushi con atún picante y mayonesa",
       "precio": 140
     }
-  ]
-   
-    ```
+    ]
+   ```
 
   ### **2. `/pedido`**
 
