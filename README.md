@@ -195,7 +195,7 @@ El chatbot expone los siguientes endpoints para interactuar con el sistema:
       "precio": 140
     }
   ]
-  ```
+   ```
 
   ### **2. `/pedido`**
 
