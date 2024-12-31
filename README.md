@@ -98,7 +98,7 @@ El proyecto incluye un script que carga datos iniciales del menú en MongoDB. Es
 ### **Datos de Ejemplo**
 
 El menú contiene los siguientes productos:
-   ```javascript
+  ```javascript
 const menu = [
     {
         nombre: "California Roll",
@@ -160,30 +160,28 @@ const menu = [
 
 ### **Paso para cargar los datos:** 
 Ejecuta el siguiente comando en tu terminal para cargar los datos iniciales en la base de datos:
-
-bash
-node src/seedMenu.js
+ 
+     node src/seedMenu.js
 
 
     
 
 
 
-  ## **Endpoints Disponibles**
+    ## **Endpoints Disponibles**
 
-El chatbot expone los siguientes endpoints para interactuar con el sistema:
+    El chatbot expone los siguientes endpoints para interactuar con el sistema:
 
----
+    ---
 
-### **1. `/menu`**
+     ### **1. `/menu`**
 
-- **Método:** `GET`
-- **Descripción:** Devuelve el menú completo de productos disponibles.
+    - **Método:** `GET`
+     - **Descripción:** Devuelve el menú completo de productos disponibles.
 
 
 
-- **Ejemplo de Respuesta Exitosa:
-``json
+     - **Ejemplo de Respuesta Exitosa:
     [
     {
       "_id": "63f18f9a7b8e9c42a4d4c6c9",
@@ -207,7 +205,6 @@ El chatbot expone los siguientes endpoints para interactuar con el sistema:
 ---
 
 #### **Cuerpo de la Solicitud (JSON):**
-``json
 
    {
   "cliente": "Axel",
@@ -225,7 +222,7 @@ El chatbot expone los siguientes endpoints para interactuar con el sistema:
 ---
 
 #### **Cuerpo de la Solicitud (JSON):**
-``json
+
 {
   "pregunta": "¿Están abiertos ahora?"
 }
