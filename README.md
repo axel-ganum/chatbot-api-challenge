@@ -84,8 +84,7 @@ El bot puede responder a las siguientes preguntas relacionadas con horarios y di
 - `"Qué hora cierran"`
 
 
-Si el mensaje no coincide con estos ejemplos, el bot responderá con un mensaje de error como este:
-    ```json
+Si el mensaje no coincide con estos ejemplos, el bot responderá con un mensaje de error como este: ```json
     {
        "status": "error",
        "mensaje": "No entiendo la pregunta. ¿Queres saber si estamos abiertos?"
@@ -184,9 +183,8 @@ El chatbot expone los siguientes endpoints para interactuar con el sistema:
 
 
 - **Ejemplo de Respuesta Exitosa:
-
-   ```json
-  ```[
+``json
+    [
     {
       "_id": "63f18f9a7b8e9c42a4d4c6c9",
       "nombre": "California Roll",
@@ -209,7 +207,7 @@ El chatbot expone los siguientes endpoints para interactuar con el sistema:
 ---
 
 #### **Cuerpo de la Solicitud (JSON):**
-```json
+``json
 
    {
   "cliente": "Axel",
@@ -227,7 +225,7 @@ El chatbot expone los siguientes endpoints para interactuar con el sistema:
 ---
 
 #### **Cuerpo de la Solicitud (JSON):**
-```json
+``json
 {
   "pregunta": "¿Están abiertos ahora?"
 }
