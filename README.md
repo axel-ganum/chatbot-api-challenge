@@ -228,7 +228,114 @@ El chatbot expone los siguientes endpoints para interactuar con el sistema:
 {
   "pregunta": "¿Están abiertos ahora?"
 }
-    
+```
+## **Manejo de Errores**
+
+A continuación, se describen los errores que pueden ocurrir en cada endpoint y las respuestas asociadas.
+
+---
+
+### **1. `/menu`**
+
+- **Descripción:** Devuelve el menú completo de productos.
+- **Error manejado:** Fallo al obtener los datos del menú desde la base de datos.
+- **Respuesta de Error:**
+  ```json
+  {
+    "error": "No se pudo obtener el menú"
+  }
+  ```
+
+  ### **Errores del Endpoint `/pedido`**
+
+- **Descripción:** Permite crear un nuevo pedido en la base de datos.
+
+---
+
+#### **Errores Manejados**
+
+1. **Datos incompletos en la solicitud**
+   - **Causa:** El cliente o los productos no se enviaron, o la lista de productos está vacía.
+   - **Ejemplo de Solicitud Inválida:**
+     ```json
+     {
+       "productos": []
+     }
+     ```
+   - **Respuesta de Error:**
+     ```json
+     {
+       "error": "Cliente y productos son requeridos"
+     }
+     ```
+   - **Código de estado:** `400 Bad Request`
+
+---
+
+2. **Error interno al guardar el pedido**
+   - **Causa:** Ocurrió un problema inesperado al intentar guardar el pedido en la base de datos.
+   - **Ejemplo de Solicitud Válida:**
+     ```json
+     {
+       "cliente": "Axel",
+       "productos": [
+         { "nombre": "California Roll", "cantidad": 2, "precio": 120 },
+         { "nombre": "Spicy Tuna Roll", "cantidad": 1, "precio": 140 }
+       ]
+     }
+     ```
+   - **Respuesta de Error:**
+     ```json
+     {
+       "error": "Error interno del servidor"
+     }
+     ```
+   - **Código de estado:** `500 Internal Server Error`
+
+---
+
+#### **Notas Adicionales**
+- El backend valida que los datos enviados en el cuerpo de la solicitud incluyan:
+  - El nombre del cliente.
+  - Una lista de productos con sus cantidades y precios.
+- Si no se proporcionan estos datos o están incompletos, el servidor devuelve un error con un mensaje claro.
+- Para evitar errores internos, verifica que la base de datos esté conectada correctamente antes de realizar solicitudes.
+
+
+ 
+ ### **Errores del Endpoint `/status`**
+
+- **Descripción:** Responde preguntas relacionadas con horarios y disponibilidad del restaurante.
+
+---
+
+#### **Errores Manejados**
+
+1. **Pregunta no relacionada o irreconocible**
+   - **Causa:** La pregunta enviada no contiene palabras clave relacionadas con horarios o disponibilidad.
+   - **Ejemplo de Solicitud:**
+     ```json
+     {
+       "pregunta": "¿Cómo está el clima hoy?"
+     }
+     ```
+   - **Respuesta de Error:**
+     ```json
+     {
+       "status": "error",
+       "mensaje": "No entiendo la pregunta. ¿Queres saber si estamos abiertos?"
+     }
+     ```
+   - **Código de estado:** `400 Bad Request`
+
+---
+
+#### **Notas Adicionales**
+- El bot responde preguntas relacionadas con los horarios del restaurante, considerando el horario predeterminado de **12:00 PM a 11:00 PM**.
+- Si se desea ajustar estos horarios, se pueden configurar en las variables de entorno de la siguiente manera:
+  ```plaintext
+  HORARIO_APERTURA=12
+  HORARIO_CIERRE=23
 
 
 

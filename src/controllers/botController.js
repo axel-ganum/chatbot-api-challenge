@@ -75,8 +75,7 @@ export const obtenerStatus =  (req, res) => {
         contienePalabraClave = true;
       }
     });
-
-    console.log('Contiene palabra clave:', contienePalabraClave);  
+ 
 
     if (contienePalabraClave) {
         const ahora = new Date();
@@ -86,7 +85,7 @@ export const obtenerStatus =  (req, res) => {
        const horarioCierre = process.env.HORARIO_CIERRE ? parseInt(process.env.HORARIO_CIERRE, 10) : 23;
 
 
-        console.log("Variables de horario:", horarioApertura, horarioCierre);
+        
 
         if (pregunta.includes('abierto') || pregunta.includes('abiertos ahora') || pregunta.includes('están abiertos ahora')) {
             if (horaActual >= horarioApertura && horaActual <= horarioCierre) {
