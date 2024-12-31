@@ -1,6 +1,6 @@
 # Chatbot Sushi - Backend
 
-Este es un backend desarrollado para gestionar un chatbot que permite a los usuarios consultar el menú, realizar pedidos y obtener información sobre el estado del restaurante (horarios, disponibilidad, etc.).
+Este es un backend desarrollado para gestionar un chatbot que permite a los usuarios consultar el menú, realizar pedidos y obtener información sobre el estado del restaurante (horarios).
 
 ## **Tecnologías Utilizadas**
 - **Node.js** con **Express**: Framework para el desarrollo del servidor.
@@ -61,7 +61,7 @@ Podes configurar los horarios de apertura y cierre de la aplicación utilizando 
 ### **Para ejecutar los test**
     
  ```bash
-     npm test
+  npm test
  ```
 ---
 
