@@ -1,10 +1,10 @@
  import express from "express";
- import { obtenerMenu, crearPedido, obtenerStatus} from "../controllers/botController.js";
+ import { crearPedido, obtenerStatus} from "../controllers/botController.js";
  const router = express.Router();
 
- router.get('/menu', obtenerMenu);
- router.post('/pedido', crearPedido);
+
  router.post('/status', obtenerStatus);
+ router.post('/pedido', crearPedido);
 
  export default router
 
