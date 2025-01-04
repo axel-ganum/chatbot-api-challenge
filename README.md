@@ -72,6 +72,14 @@ Podes configurar los horarios de apertura y cierre de la aplicación utilizando 
 
 El bot puede responder a las siguientes preguntas relacionadas con horarios y disponibilidad:
 
+### **Menú:**
+- `"Mostrar menú"`
+- `"Ver menú"`
+- `"Quiero el menú"`
+- `"Dame el menú"`
+- `"Mostrar la carta"`
+
+
 ### **Estado actual del restaurante:**
 - `"¿Están abiertos ahora?"`
 - `"¿Está abierto?"`
@@ -176,32 +184,31 @@ Ejecuta el siguiente comando en tu terminal para cargar los datos iniciales en l
 El chatbot expone los siguientes endpoints para interactuar con el sistema:
 
  ---
+### **1. `/status`**
 
-   ### **1. `/menu`**
+- **Método:** `POST`
+- **Descripción:** Responde preguntas relacionadas con horarios y devuelve el menú.
 
- - **Método:** `GET`
- - **Descripción:** Devuelve el menú completo de productos disponibles.
+---
+
+#### **Cuerpo de la Solicitud (JSON):
+```json
+{
+  "pregunta": "¿Están abiertos ahora?"
+}
+```
+
+```json
+{
+  "pregunta": "mostrar menú"
+}
+```
 
 
- - **Ejemplo de Respuesta Exitosa:**
-    ```json
-    [
-    {
-      "_id": "63f18f9a7b8e9c42a4d4c6c9",
-      "nombre": "California Roll",
-      "descripcion": "Rollo de sushi con cangrejo, aguacate y pepino",
-      "precio": 120
-    },
-    {
-      "_id": "63f18f9a7b8e9c42a4d4c6ca",
-      "nombre": "Spicy Tuna Roll",
-      "descripcion": "Rollo de sushi con atún picante y mayonesa",
-      "precio": 140
-    }
-    ]
-   ```
 
-  ### **2. `/pedido`**
+   
+
+  ### **1. `/pedido`**
 
 - **Método:** `POST`
 - **Descripción:** Crea un nuevo pedido con la información proporcionada.
@@ -220,45 +227,70 @@ El chatbot expone los siguientes endpoints para interactuar con el sistema:
   ]
 }
 ```
-### **3. `/status`**
 
-- **Método:** `POST`
-- **Descripción:** Responde preguntas relacionadas con horarios.
-
----
-
-#### **Cuerpo de la Solicitud (JSON):
-```json
-{
-  "pregunta": "¿Están abiertos ahora?"
-}
-```
 ## **Manejo de Errores**
 
 A continuación, se describen los errores que pueden ocurrir en cada endpoint y las respuestas asociadas.
 
 ---
 
-### **1. `/menu`**
 
-- **Descripción:** Devuelve el menú completo de productos.
-- **Error manejado:** Fallo al obtener los datos del menú desde la base de datos.
-- **Respuesta de Error:**
-  ```json
-  {
-    "error": "No se pudo obtener el menú"
-  }
-  ```
+#### **Errores Manejados**
 
-  ### **Errores del Endpoint `/pedido`**
+ ### **Errores del Endpoint `/status`**
 
-- **Descripción:** Permite crear un nuevo pedido en la base de datos.
+- **Descripción:** Responde preguntas relacionadas con horarios y disponibilidad del restaurante.
 
 ---
 
 #### **Errores Manejados**
 
-1. **Datos incompletos en la solicitud**
+1. **Pregunta no relacionada o irreconocible**
+   - **Causa:** La pregunta enviada no contiene palabras clave relacionadas con horarios o disponibilidad.
+   - **Ejemplo de Solicitud:**
+     ```json
+     {
+       "pregunta": "¿Cómo está el clima hoy?"
+     }
+     ```
+   - **Respuesta de Error:**
+     ```json
+     {
+       "status": "error",
+       "mensaje": "No entiendo la pregunta. ¿Queres saber si estamos abiertos?"
+     }
+     ```
+   - **Código de estado:** `400 Bad Request`
+
+---
+
+2. **Error al obtener el menú**
+   - **Causa:** Ocurre cuando hay un problema al consultar la base de datos para obtener el menú, ya sea por un fallo en la conexión o un error interno.
+   - **Ejemplo de Solicitud:**
+     ```json
+     {
+       "pregunta": "¿Me puedes mostrar el menú?"
+     }
+     ```
+   - **Respuesta de Error:**
+     ```json
+     {
+       "status": "error",
+       "mensaje": "Error al obtener el menú"
+     }
+     ```
+      - **Código de estado:** `500 Internal Server Error`
+
+#### **Notas Adicionales**
+- El bot responde preguntas relacionadas con los horarios del restaurante, considerando el horario predeterminado de **12:00 PM a 11:00 PM**.
+- Si se desea ajustar estos horarios, se pueden configurar en las variables de entorno de la siguiente manera:
+
+  ```plaintext
+  HORARIO_APERTURA=12
+  HORARIO_CIERRE=23
+  ```
+
+  1. **Datos incompletos en la solicitud**
    - **Causa:** El cliente o los productos no se enviaron, o la lista de productos está vacía.
    - **Ejemplo de Solicitud Inválida:**
      ```json
@@ -302,46 +334,7 @@ A continuación, se describen los errores que pueden ocurrir en cada endpoint y 
 - El backend valida que los datos enviados en el cuerpo de la solicitud incluyan:
   - El nombre del cliente.
   - Una lista de productos con sus cantidades y precios.
-- Si no se proporcionan estos datos o están incompletos, el servidor devuelve un error con un mensaje claro.
-- Para evitar errores internos, verifica que la base de datos esté conectada correctamente antes de realizar solicitudes.
 
-
- 
- ### **Errores del Endpoint `/status`**
-
-- **Descripción:** Responde preguntas relacionadas con horarios y disponibilidad del restaurante.
-
----
-
-#### **Errores Manejados**
-
-1. **Pregunta no relacionada o irreconocible**
-   - **Causa:** La pregunta enviada no contiene palabras clave relacionadas con horarios o disponibilidad.
-   - **Ejemplo de Solicitud:**
-     ```json
-     {
-       "pregunta": "¿Cómo está el clima hoy?"
-     }
-     ```
-   - **Respuesta de Error:**
-     ```json
-     {
-       "status": "error",
-       "mensaje": "No entiendo la pregunta. ¿Queres saber si estamos abiertos?"
-     }
-     ```
-   - **Código de estado:** `400 Bad Request`
-
----
-
-#### **Notas Adicionales**
-- El bot responde preguntas relacionadas con los horarios del restaurante, considerando el horario predeterminado de **12:00 PM a 11:00 PM**.
-- Si se desea ajustar estos horarios, se pueden configurar en las variables de entorno de la siguiente manera:
-
-  ```plaintext
-  HORARIO_APERTURA=12
-  HORARIO_CIERRE=23
-  ```
 
 
 
